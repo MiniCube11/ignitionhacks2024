@@ -64,11 +64,10 @@ output = []
 index = 0
 for row in boxes_rows[:MAX_ROWS+1]:
     for x, y, w, h in row:
-        # if abs(h - median_height) / median_height <= 0.8:
-            line_image = image[y:y + h, x:x+w]
-            line_text = pytesseract.image_to_string(line_image, config='--psm 7')
-            output.append((line_text.strip(), index))
-            index += 1
+        line_image = image[y:y + h, x:x+w]
+        line_text = pytesseract.image_to_string(line_image, config='--psm 7')
+        output.append((line_text.strip(), index))
+        index += 1
     output.append("\n")
 
 print(output)
@@ -79,9 +78,8 @@ print(median_height, "mde")
 index = 0
 for row in boxes_rows[:MAX_ROWS+1]:
     for x, y, w, h in row:
-        if abs(h - median_height) / median_height <= 0.8:
-            colour = (0, 0, index * 50) if index % 2 else (index * 50, 0, 0)
-            cv2.rectangle(image, (x, y), (x + w, y + h), colour, 2)
+        colour = (0, 0, index * 50) if index % 2 else (index * 50, 0, 0)
+        cv2.rectangle(image, (x, y), (x + w, y + h), colour, 2)
     index += 1
 
 # cv2.drawContours(image, filtered_contours, -1, (0, 255, 0))
