@@ -140,7 +140,10 @@ def read_text(start_pos, finish_pos):
     sx, sy = nsx, nsy
     fx, fy = nfx, nfy
 
-    print(' '.join(output[start_idx:finish_idx+1]))
+    text_output = ' '.join(output[start_idx:finish_idx+1])
+    f = open("notes.txt", "a")
+    f.write(text_output + "\n\n")
+    f.close()
 
     # cv2.rectangle(image, (round(sx * image_width), round(sy * image_height) - median_height), (round(fx * image_width), round(fy * image_height) - median_height), (0, 255, 0), -1)
     cv2.line(image, (sx, sy), (sx + median_height, sy), (0, 255, 0), 2)
